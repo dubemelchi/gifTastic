@@ -1,0 +1,43 @@
+.gif-btn{
+font-size: 30px;
+color: white;
+margin: 15px;
+background-color: teal;
+border-style: outset;
+
+}
+
+.container {
+  width: 980px;
+  margin: auto;
+
+}
+
+#add-gif {
+font-size: 20px;
+color: white;
+margin-top: 15px;
+background-color: teal;
+
+}
+
+#gif-form {
+  float: right;
+  font-size: 20px;
+}
+
+#gifInput {
+  font-size: 20px;
+  
+
+}
+
+h1 {
+  margin: 15px;
+
+}
+
+img {
+  float: inherit;
+
+}
