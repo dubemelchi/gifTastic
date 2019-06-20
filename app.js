@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 // initial array of gifs:
-var gifs = ["meow","woof"];
+var gifs = ["dog", "cat"];
 
 console.log(gifs);
 
@@ -9,12 +9,15 @@ console.log(gifs);
 function displayGifs(){
 
   var gif = $(this).attr("data-name");
-  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=bfSM6gDpQPTtJZvy6MHqRxjOd7aOKkzw&limit=10";
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        gif + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function(response) {
+
+    var gifResults = response.data;
 
     //console.log(queryURL);
 
@@ -23,14 +26,13 @@ function displayGifs(){
     var gifDiv = $("<div class='gif'>");
 
     // variable for rating:
-    var rating = response.rated;
+    //var rating = response.rated;
 
-    var pRating = $("<p>").text("Rating: " + rating);
+    //var pRating = $("<p>").text("Rating: " + rating);
 
-    gifDiv.append(pRating);
+    //gifDiv.append(pRating);
 
-    var gifResults = response.data;
-
+    
     var gifImage = $("<img>").attr("src", gifResults);
 
     //gifImage.attr("src", gifURL);

@@ -4,39 +4,119 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Giftastic Extravaganza!</title>
+  <title>Gif HomeWork Again</title>
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <div class="container" >
+
+    <h1>Gif Search 9000!</h1>
+
+    <!--Rendered buttons will go here-->
+    <div id="buttons-view"></div>
+
+    <!--this is the input form-->
+    <form id="gif-form">
+      <label id="gifInput" for="gif-input">Search</label> <br>
+
+      <input type="text" id="gif-input"> <br>
+
+      <input id="add-gif" type="submit" value="Submit"> <br>
+
+    </form>
+
+    <!--Gifs will be dropped here-->
+    <div id="gifs-view"></div>
+
+  </div>
+
+  <!--Inline JS & jQ-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+
+    var gifs = ["dog", "cat", "fish", "lion"];
+
+    console.log(gifs);
+
+    function displayGifInfo() {
+      //????
+      var gif = $(this).attr("data-name"); 
+
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        gif + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function(response) {
+
+        var results = response.data;
+
+        console.log(results);
+
+        for (var i = 0; i < results.length; i++) {
+
+        var gifDiv = $("<div class='gif'>");
+
+        var gifRating = $("<p>").text("Rating: " + results[i].rating);
+
+        var gifImage = $("<img>");
+
+        gifImage.attr("src", results[i].images.fixed_height.url);
+        
+        gifDiv.append(gifRating);
+        gifDiv.append(gifImage);
+        
+
+        $("#gifs-view").prepend(gifDiv);
+
+        }
+      })
+
+      
+    }
+
+    function renderButtons() {
+      
+      $("#buttons-view").empty();
+
+      for (var i = 0; i < gifs.length; i++) {
+
+        var a = $("<button>");
+
+        a.addClass("gif-btn");
+
+        a.attr("data-name", gifs[i]);
+
+        a.text(gifs[i]);
+
+        $("#buttons-view").append(a);
+
+      }
+    }
+
+    $("#add-gif").on("click", function(event) {
+
+      event.preventDefault();
+
+      var gif = $("#gif-input").val().trim();
+
+      gifs.push(gif);
+
+      renderButtons();
+
+    })
+
+    $(document).on("click", ".gif-btn", displayGifInfo);
+
+    renderButtons();
+
   
-  <h1>Gif Search 9000</h1>
-<!--rendered button will go here-->
-  <div id="buttons-view"></div>
-
-  <form id="gif-form">
-    <label for="gif-input">Add a gif foo!</label>
-    <br>
-    <input type="text" id="gif-input">
-    <br>
-
-
-    <input id="add-gif" type="submit" value="Add a gif foo!" >
-  </form>
-
-  <div id="gif-view" ></div>
-
-
-
-
-
-
-
-
-
-
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous">
   </script>
   
-  <script src="app.js" ></script>
+</body>
 </html>
