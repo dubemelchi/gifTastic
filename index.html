@@ -82,11 +82,31 @@
           class: "gif",
         })
 
+        
+
+
         gifDiv.append(gifRating);
 
         gifDiv.append(gifImage);
         
         $("#gifs-view").prepend(gifDiv);
+
+
+        $(".gif").on("click", function() {
+
+           var state = $(this).attr("dataState");
+
+            console.log(state);
+
+            if (state === "still") {
+        $(this).attr("src", $(this).attr("dataAnimate"));
+        $(this).attr("dataState", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("dataStill"));
+        $(this).attr("dataState", "still");
+      }
+      
+          })
 
         }
       })
