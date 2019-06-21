@@ -64,38 +64,29 @@
 
         var gifRating = $("<p>").text("Rating: " + results[i].rating);
 
-        var gifImage = $("<img class='state'>");
+                                $("img").attr({
+                        dataAos: "fade-down",
+                        dataAosDuration: "600"
+                        });
 
-        gifImage.attr("src", results[i].images.fixed_height_still.url);
+        var gifImage = $("<img>").attr({
 
-        gifImage.attr("src", results[i].images.fixed_height.url )
+          src: results[i].images.fixed_height_still.url,
+
+          dataStill: results[i].images.fixed_height_still.url,
+
+          dataAnimate: results[i].images.fixed_height.url,
+
+          dataState: "still",
+
+          class: "gif",
+        })
 
         gifDiv.append(gifRating);
 
         gifDiv.append(gifImage);
         
         $("#gifs-view").prepend(gifDiv);
-
-          $(".state").on("click", function() {
-
-            var gifState = $(this).attr("data-state");
-
-            console.log(gifState);
-
-            
-
-    
-
-
-
-           
-
-             
-          })
-
-    
-
-        
 
         }
       })
